@@ -1,10 +1,8 @@
 ﻿using Mango.Services.ShoppingCartAPI.Models.Dto;
 using Mango.Services.ShoppingCartAPI.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Mango.Services.ShoppingCartAPI.Controllers
@@ -67,12 +65,12 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             return _reponse;
         }
 
-        [HttpPost("RemoveFromCart/{cartDetailsId}")]
-        public async Task<object> RemoveFromCart(int cartDetailsId)
+        [HttpPost("RemoveFromCart")]
+        public async Task<object> RemoveFromCart(int cartId)
         {
             try
             {
-                _reponse.Result = await _cartRepository.RemoveFromCart(cartDetailsId);
+                _reponse.Result = await _cartRepository.RemoveFromCart(cartId);
             }
             catch (Exception ex)
             {
