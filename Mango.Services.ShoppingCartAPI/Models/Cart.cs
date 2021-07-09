@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shoppingcart.API.Models
+namespace Mango.Services.ShoppingCartAPI.Models
 {
     public class Cart
     {

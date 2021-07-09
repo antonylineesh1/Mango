@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shoppingcart.API
+namespace Mango.Services.ShoppingCartAPI
 {
     public class Startup
     {

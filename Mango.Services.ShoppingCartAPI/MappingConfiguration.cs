@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Mango.Services.ShoppingCartAPI.Models;
 using Mango.Services.ShoppingCartAPI.Models.Dto;
-using Shoppingcart.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

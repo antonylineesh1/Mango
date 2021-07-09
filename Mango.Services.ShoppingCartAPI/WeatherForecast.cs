@@ -1,6 +1,6 @@
 using System;
 
-namespace Shoppingcart.API
+namespace Mango.Services.ShoppingCartAPI
 {
     public class WeatherForecast
     {
