@@ -1,5 +1,6 @@
 ﻿using Mango.Services.ShoppingCartAPI.Models.Dto;
 using Mango.Services.ShoppingCartAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,7 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
             return _reponse;
         }
 
+        [Authorize]
         [HttpPost("AddCart")]
         public async Task<object> AddCart(CartDto cartDto)
         {

@@ -48,7 +48,8 @@ namespace Mango.Web
                 options.ClientId = "mango";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
-
+                options.ClaimActions.MapJsonKey("sub", "sub");
+                options.ClaimActions.MapJsonKey("role", "role");
                 options.TokenValidationParameters.NameClaimType = "name";
                 options.TokenValidationParameters.RoleClaimType = "role";
                 options.Scope.Add("mango");
