@@ -1,4 +1,5 @@
 ﻿using Mango.Web.Models;
+using Mango.Web.Models.Dto;
 using Mango.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -15,11 +16,13 @@ namespace Mango.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
+        public ICouponService _couponService { get; }
 
-        public CartController(IProductService productService,ICartService cartService)
+        public CartController(IProductService productService,ICartService cartService,ICouponService couponService)
         {
             _productService = productService;
             _cartService = cartService;
+            _couponService = couponService;
         }
         [Authorize]
         public async Task<IActionResult> CartIndex()
@@ -83,10 +86,21 @@ namespace Mango.Web.Controllers
                 cart = JsonConvert.DeserializeObject<CartDto>(response.Result.ToString());
                 if (cart.CartHeader != null)
                 {
+                    if (!string.IsNullOrEmpty(cart.CartHeader.CouponCode))
+                    {
+                        var couponResp = await _couponService.GetCoupon<ResponseDto>(cart.CartHeader.CouponCode, string.Empty);
+                        if(couponResp !=null && couponResp.IsSuccess)
+                        {
+                            var couponDto = JsonConvert.DeserializeObject<CouponDto>(couponResp.Result.ToString());
+                            cart.CartHeader.DiscountTotal = couponDto.DiscountAmount;
+                        }
+
+                    }
                     foreach (var cartDetail in cart.CartDetails)
                     {
                         cart.CartHeader.OrderTotal += cartDetail.Count * cartDetail.Product.Price;
                     }
+                    cart.CartHeader.OrderTotal -= cart.CartHeader.DiscountTotal;
                 }
             }
             return cart;        
