@@ -33,7 +33,7 @@ namespace Mango.Services.ShoppingCartAPI.Repository
         public async Task<bool> RemoveCoupon(string userId)
         {
             var cartHeader = await _db.CartHeaders.FirstOrDefaultAsync(x => x.UserId == userId);
-            cartHeader.CouponCode = string.Empty;
+            cartHeader.CouponCode = null;
             _db.Update(cartHeader);
             await _db.SaveChangesAsync();
             return true;
