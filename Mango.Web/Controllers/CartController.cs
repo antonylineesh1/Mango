@@ -43,6 +43,11 @@ namespace Mango.Web.Controllers
             return actionResult;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await GetCartOfUser());
+        }
 
         [HttpPost]
         [ActionName("ApplyCoupon")]
